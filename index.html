@@ -15,38 +15,30 @@
         }
         .gallery-container {
             width: 100%;
-            overflow: hidden; /* Clearfix for floated items */
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
             padding: 16px;
             box-sizing: border-box;
         }
-        .gallery-container::after {
-            content: "";
-            display: table;
-            clear: both; /* Clearfix */
-        }
         .gallery-item {
-            float: left;
-            width: 33.33%; /* 3 images per row on desktop */
-            margin: 8px;
+            width: 100%;
             overflow: hidden; /* Clip image corners */
             border-radius: 12px; /* Card-like rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            min-width: 0;
             box-sizing: border-box;
         }
         .gallery-item img {
             width: 100%;
             height: auto;
-            max-height: 200px; /* Portrait images */
+            max-height: 200px; /* Uniform height for all images */
+            min-height: 0;
             object-fit: cover;
             transition: transform 0.4s ease;
             display: block;
             border-radius: 12px; /* Rounded image corners */
             cursor: pointer; /* Indicate clickable */
-        }
-        .gallery-item.landscape img {
-            max-height: 200px; /* Landscape images */
         }
         .gallery-item:hover {
             transform: translateY(-5px) scale(1.05);
@@ -337,18 +329,13 @@
         }
         @media (max-width: 360px) {
             .gallery-container {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 8px;
                 padding: 4px;
             }
-            .gallery-item {
-                width: 100%; /* 1 image per row */
-                margin: 4px 0; /* Vertical spacing only */
-            }
             .gallery-item img {
-                max-height: 150px; /* Portrait images */
+                max-height: 120px; /* Uniform height for all images */
                 border-radius: 12px;
-            }
-            .gallery-item.landscape img {
-                max-height: 150px; /* Landscape images */
             }
             #viewer-img {
                 max-width: 95%;
@@ -377,18 +364,13 @@
                 padding: 0.75rem 1.5rem;
             }
             .gallery-container {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 8px;
                 padding: 8px;
             }
-            .gallery-item {
-                width: 100%; /* 1 image per row */
-                margin: 4px 0; /* Vertical spacing only */
-            }
             .gallery-item img {
-                max-height: 200px; /* Portrait images */
+                max-height: 120px; /* Uniform height for all images */
                 border-radius: 12px;
-            }
-            .gallery-item.landscape img {
-                max-height: 200px; /* Landscape images */
             }
             #viewer-img {
                 max-width: 95%;
@@ -453,17 +435,12 @@
         }
         @media (min-width: 641px) and (max-width: 768px) {
             .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
                 padding: 12px;
             }
-            .gallery-item {
-                width: 50%; /* 2 images per row */
-                margin: 6px;
-            }
             .gallery-item img {
-                max-height: 160px;
-            }
-            .gallery-item.landscape img {
-                max-height: 120px;
+                max-height: 160px; /* Uniform height for all images */
             }
             .section-title {
                 font-size: 2rem;
@@ -479,9 +456,12 @@
             }
         }
         @media (min-width: 769px) {
-            .gallery-item {
-                width: 33.33%; /* 3 images per row */
-                margin: 8px;
+            .gallery-container {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            .gallery-item img {
+                max-height: 200px; /* Uniform height for all images */
             }
             .youtube-container {
                 padding-bottom: 56.25%;
@@ -605,13 +585,13 @@
                 <div class="gallery-item"><img src="https://i.ibb.co/Kc5pTLkh/Wedding-Image-36.jpg" alt="Wedding Image 36" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/nNMLhMkr/Wedding-Image-37.jpg" alt="Wedding Image 37" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/p6nRqMRM/Wedding-Image-38.jpg" alt="Wedding Image 38" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/Xf554ykv/Wedding-Image-39.jpg" alt="Wedding Image 39" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/wxgr0S4/Wedding-Image-40.jpg" alt="Wedding Image 40" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/qYjdgxVZ/Wedding-Image-41.jpg" alt="Wedding Image 41" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/DhSWVXJ/Wedding-Image-42.jpg" alt="Wedding Image 42" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/Fq7QPVJj/Wedding-Image-43.jpg" alt="Wedding Image 43" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/MkGZZYD9/Wedding-Image-44.jpg" alt="Wedding Image 44" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="https://i.ibb.co/wFQNZ4MN/Wedding-Image-45.jpg" alt="Wedding Image 45" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Xf554ykv/Wedding-Image-39.jpg" alt="Wedding Image 39" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/wxgr0S4/Wedding-Image-40.jpg" alt="Wedding Image 40" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/qYjdgxVZ/Wedding-Image-41.jpg" alt="Wedding Image 41" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/DhSWVXJ/Wedding-Image-42.jpg" alt="Wedding Image 42" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Fq7QPVJj/Wedding-Image-43.jpg" alt="Wedding Image 43" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/MkGZZYD9/Wedding-Image-44.jpg" alt="Wedding Image 44" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/wFQNZ4MN/Wedding-Image-45.jpg" alt="Wedding Image 45" loading="lazy"></div>
             </div>
         </div>
     </section>
@@ -620,7 +600,7 @@
         <div id="close-viewer">✕</div>
         <div id="prev-arrow">◄</div>
         <div id="next-arrow">►</div>
-        <a id="download-btn" style="visibility: hidden;" download>
+        <a id="download-btn" style="visibility: hidden;" href="" download>
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
