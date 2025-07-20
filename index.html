@@ -43,17 +43,90 @@
             transition: transform 0.4s ease;
             display: block;
             border-radius: 12px; /* Rounded image corners */
+            cursor: pointer; /* Indicate clickable */
         }
         .gallery-item.landscape img {
-            max-height: 140px; /* Landscape images */
+            max-height: 200px; /* Landscape images */
         }
         .gallery-item:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            cursor: pointer;
         }
         .gallery-item:hover img {
             transform: scale(1.2);
+        }
+        #image-viewer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        #image-viewer.active {
+            display: flex;
+        }
+        #viewer-img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        #close-viewer {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+        #close-viewer:hover {
+            opacity: 0.7;
+        }
+        #prev-arrow, #next-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 1rem;
+            transition: opacity 0.3s ease;
+        }
+        #prev-arrow:hover, #next-arrow:hover {
+            opacity: 0.7;
+        }
+        #prev-arrow {
+            left: 1rem;
+        }
+        #next-arrow {
+            right: 1rem;
+        }
+        #download-btn {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem;
+            border-radius: 9999px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #download-btn:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+        #download-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
         }
         section {
             opacity: 0;
@@ -271,11 +344,26 @@
                 margin: 4px 0; /* Vertical spacing only */
             }
             .gallery-item img {
-                max-height: 100px; /* Portrait images */
+                max-height: 150px; /* Portrait images */
                 border-radius: 12px;
             }
             .gallery-item.landscape img {
-                max-height: 70px; /* Landscape images */
+                max-height: 150px; /* Landscape images */
+            }
+            #viewer-img {
+                max-width: 95%;
+                max-height: 80vh;
+            }
+            #prev-arrow, #next-arrow {
+                font-size: 1.5rem;
+                padding: 0.75rem;
+            }
+            #download-btn {
+                padding: 0.4rem;
+            }
+            #download-btn svg {
+                width: 1.25rem;
+                height: 1.25rem;
             }
         }
         @media (max-width: 640px) {
@@ -296,11 +384,26 @@
                 margin: 4px 0; /* Vertical spacing only */
             }
             .gallery-item img {
-                max-height: 120px; /* Portrait images */
+                max-height: 200px; /* Portrait images */
                 border-radius: 12px;
             }
             .gallery-item.landscape img {
-                max-height: 80px; /* Landscape images */
+                max-height: 200px; /* Landscape images */
+            }
+            #viewer-img {
+                max-width: 95%;
+                max-height: 80vh;
+            }
+            #prev-arrow, #next-arrow {
+                font-size: 1.5rem;
+                padding: 0.75rem;
+            }
+            #download-btn {
+                padding: 0.4rem;
+            }
+            #download-btn svg {
+                width: 1.25rem;
+                height: 1.25rem;
             }
             .transition-line.visible {
                 height: 50px;
@@ -339,7 +442,7 @@
                 padding: 2rem 1rem;
             }
             .hero-section {
-                height: 80vh;
+                height: 80%; /* Adjusted to 80% of viewport height */
             }
             .youtube-container {
                 padding-bottom: 56.25%;
@@ -513,6 +616,18 @@
         </div>
     </section>
 
+    <div id="image-viewer">
+        <div id="close-viewer">✕</div>
+        <div id="prev-arrow">◄</div>
+        <div id="next-arrow">►</div>
+        <a id="download-btn" style="visibility: hidden;" download>
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+        </a>
+        <img id="viewer-img" src="" alt="Full-screen image">
+    </div>
+
     <script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
@@ -557,13 +672,68 @@
         sections.forEach(section => observer.observe(section));
         textElements.forEach(element => observer.observe(element));
         transitionLines.forEach(line => observer.observe(line));
+
         const images = document.querySelectorAll('.gallery-item img');
         images.forEach((img, index) => {
             setTimeout(() => {
                 img.src = img.src;
             }, index * 100);
         });
-       
+
+        const imageViewer = document.getElementById('image-viewer');
+        const viewerImg = document.getElementById('viewer-img');
+        const closeViewer = document.getElementById('close-viewer');
+        const prevArrow = document.getElementById('prev-arrow');
+        const nextArrow = document.getElementById('next-arrow');
+        const downloadBtn = document.getElementById('download-btn');
+        const galleryImages = Array.from(images).map(img => ({
+            src: img.src,
+            alt: img.alt
+        }));
+        let currentImageIndex = 0;
+
+        function updateViewerImage(index) {
+            viewerImg.src = galleryImages[index].src;
+            viewerImg.alt = galleryImages[index].alt;
+            downloadBtn.href = galleryImages[index].src;
+            downloadBtn.download = galleryImages[index].alt.replace(' ', '-') + '.jpg';
+            currentImageIndex = index;
+        }
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                updateViewerImage(index);
+                imageViewer.classList.add('active');
+            });
+        });
+
+        prevArrow.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateViewerImage(currentImageIndex);
+        });
+
+        nextArrow.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateViewerImage(currentImageIndex);
+        });
+
+        closeViewer.addEventListener('click', () => {
+            imageViewer.classList.remove('active');
+            viewerImg.src = '';
+            viewerImg.alt = '';
+            downloadBtn.href = '';
+            downloadBtn.download = '';
+        });
+
+        imageViewer.addEventListener('click', (e) => {
+            if (e.target === imageViewer) {
+                imageViewer.classList.remove('active');
+                viewerImg.src = '';
+                viewerImg.alt = '';
+                downloadBtn.href = '';
+                downloadBtn.download = '';
+            }
+        });
     </script>
 </body>
 </html>
