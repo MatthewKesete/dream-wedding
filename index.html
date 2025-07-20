@@ -29,8 +29,8 @@
         }
         .gallery-item img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 350px;
+            object-fit:cover;
             transition: transform 0.4s ease;
             display: block;
         }
@@ -40,6 +40,7 @@
         .gallery-item:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
         }
         .gallery-item:hover img {
             transform: scale(1.2);
@@ -278,7 +279,7 @@
                 height: 140px;
             }
             .gallery-item.landscape img {
-                height: 100px;
+                height: 200px;
             }
             .transition-line.visible {
                 height: 50px;
@@ -384,8 +385,12 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative h-screen flex items-center justify-center text-white hero-section">
-        <img class="hero-blur" src="banner/wedding_banner.jpg" alt="">
-        <img class="hero-banner" src="banner/wedding_banner.jpg" alt="Wedding Banner">
+        <!-- 
+            Replace src="banner/wedding_banner.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
+            Upload the hero banner image to Imgur, right-click to copy the direct link, and test in an incognito tab.
+        -->
+        <img class="hero-blur" src="https://i.ibb.co/fd7skFmb/Wedding-Image-9.jpg" alt="">
+        <img class="hero-banner" src="https://i.ibb.co/fd7skFmb/Wedding-Image-9.jpg" alt="Wedding Banner">
         <div class="hero-overlay"></div>
         <div class="relative z-10 text-center">
             <h1 class="text-4xl md:text-6xl font-bold mb-3 text-yellow-400 fade-in">Dream Pictures</h1>
@@ -443,52 +448,62 @@
             </p>
             <div class="gallery-grid">
                 <!-- Portrait Images (38) -->
-                <div class="gallery-item"><img src="portrait/wedding image 1.jpg" alt="Wedding Image 1" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 2.jpg" alt="Wedding Image 2" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 3.jpg" alt="Wedding Image 3" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 4.jpg" alt="Wedding Image 4" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 5.jpg" alt="Wedding Image 5" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 6.jpg" alt="Wedding Image 6" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 7.jpg" alt="Wedding Image 7" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 8.jpg" alt="Wedding Image 8" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 9.jpg" alt="Wedding Image 9" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 10.jpg" alt="Wedding Image 10" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 11.jpg" alt="Wedding Image 11" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 12.jpg" alt="Wedding Image 12" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 13.jpg" alt="Wedding Image 13" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 14.jpg" alt="Wedding Image 14" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 15.jpg" alt="Wedding Image 15" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 16.jpg" alt="Wedding Image 16" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 17.jpg" alt="Wedding Image 17" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 18.jpg" alt="Wedding Image 18" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 19.jpg" alt="Wedding Image 19" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 20.jpg" alt="Wedding Image 20" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 21.jpg" alt="Wedding Image 21" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 22.jpg" alt="Wedding Image 22" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 23.jpg" alt="Wedding Image 23" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 24.jpg" alt="Wedding Image 24" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 25.jpg" alt="Wedding Image 25" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 26.jpg" alt="Wedding Image 26" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 27.jpg" alt="Wedding Image 27" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 28.jpg" alt="Wedding Image 28" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 29.jpg" alt="Wedding Image 29" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 30.jpg" alt="Wedding Image 30" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 31.jpg" alt="Wedding Image 31" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 32.jpg" alt="Wedding Image 32" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 33.jpg" alt="Wedding Image 33" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 34.jpg" alt="Wedding Image 34" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 35.jpg" alt="Wedding Image 35" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 36.jpg" alt="Wedding Image 36" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 37.jpg" alt="Wedding Image 37" loading="lazy"></div>
-                <div class="gallery-item"><img src="portrait/wedding image 38.jpg" alt="Wedding Image 38" loading="lazy"></div>
+                <!-- 
+                    Replace each src="portrait/weddingX.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
+                    Upload each image to Imgur, right-click to copy the direct link, and test in an incognito tab.
+                    Example: <img src="https://i.imgur.com/abc123def.jpg" alt="Wedding Image 1" loading="lazy">
+                -->
+                <div class="gallery-item"><img src="https://i.ibb.co/TxdW9xJJ/Wedding-Image-1.jpg" alt="Wedding Image 1" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/PGjDKGB4/Wedding-Image-2.jpg" alt="Wedding Image 2" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/nqwDd0Vm/Wedding-Image-3.jpg" alt="Wedding Image 3" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/3YRLhBfv/Wedding-Image-4.jpg" alt="Wedding Image 4" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/hFFywDXK/Wedding-Image-5.jpg" alt="Wedding Image 5" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/RGyhMwvV/Wedding-Image-6.jpg" alt="Wedding Image 6" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/WXkynsV/Wedding-Image-7.jpg" alt="Wedding Image 7" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/NnTnjbDv/Wedding-Image-8.jpg" alt="Wedding Image 8" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/fd7skFmb/Wedding-Image-9.jpg" alt="Wedding Image 9" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Mx40z1CQ/Wedding-Image-10.jpg" alt="Wedding Image 10" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Gv4qYhrm/Wedding-Image-11.jpg" alt="Wedding Image 11" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/ZRyX4gkj/Wedding-Image-12.jpg" alt="Wedding Image 12" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/C351d8S0/Wedding-Image-13.jpg" alt="Wedding Image 13" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/DPpx3nKj/Wedding-Image-14.jpg" alt="Wedding Image 14" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/tTP6fv5q/Wedding-Image-15.jpg" alt="Wedding Image 15" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/7xV7F2c8/Wedding-Image-16.jpg" alt="Wedding Image 16" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/j9NgLsK7/Wedding-Image-17.jpg" alt="Wedding Image 17" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/VcF5K4Bw/Wedding-Image-18.jpg" alt="Wedding Image 18" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/RG4zMdxq/Wedding-Image-19.jpg" alt="Wedding Image 19" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/mCR2LLGd/Wedding-Image-20.jpg" alt="Wedding Image 20" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/SwrgBWmt/Wedding-Image-21.jpg" alt="Wedding Image 21" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/h5WWYpC/Wedding-Image-22.jpg" alt="Wedding Image 22" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/ycj6kW6V/Wedding-Image-23.jpg" alt="Wedding Image 23" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/d0fZMQSv/Wedding-Image-24.jpg" alt="Wedding Image 24" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/WpMRz02f/Wedding-Image-25.jpg" alt="Wedding Image 25" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/bgx7b3kG/Wedding-Image-26.jpg" alt="Wedding Image 26" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/67DR4drC/Wedding-Image-27.jpg" alt="Wedding Image 27" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/QFDDQBMS/Wedding-Image-28.jpg" alt="Wedding Image 28" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/XfhySV6x/Wedding-Image-29.jpg" alt="Wedding Image 29" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/jPtDWyQ9/Wedding-Image-30.jpg" alt="Wedding Image 30" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/1JrxcqKV/Wedding-Image-31.jpg" alt="Wedding Image 31" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/wNkyGpK7/Wedding-Image-32.jpg" alt="Wedding Image 32" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/gLmWmhy7/Wedding-Image-33.jpg" alt="Wedding Image 33" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/LXGT9V4D/Wedding-Image-34.jpg" alt="Wedding Image 34" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/yny6289z/Wedding-Image-35.jpg" alt="Wedding Image 35" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/Kc5pTLkh/Wedding-Image-36.jpg" alt="Wedding Image 36" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/nNMLhMkr/Wedding-Image-37.jpg" alt="Wedding Image 37" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://i.ibb.co/p6nRqMRM/Wedding-Image-38.jpg" alt="Wedding Image 38" loading="lazy"></div>
                 <!-- Landscape Images (7) -->
-                <div class="gallery-item landscape"><img src="landscape/wedding image 39.jpg" alt="Wedding Image 39" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 40.jpg" alt="Wedding Image 40" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 41.jpg" alt="Wedding Image 41" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 42.jpg" alt="Wedding Image 42" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 43.jpg" alt="Wedding Image 43" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 44.jpg" alt="Wedding Image 44" loading="lazy"></div>
-                <div class="gallery-item landscape"><img src="landscape/wedding image 45.jpg" alt="Wedding Image 45" loading="lazy"></div>
+                <!-- 
+                    Replace each src="landscape/weddingX.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
+                    Upload each image to Imgur, right-click to copy the direct link, and test in an incognito tab.
+                    Example: <img src="https://i.imgur.com/xyz789abc.jpg" alt="Wedding Image 39" loading="lazy">
+                -->
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/Xf554ykv/Wedding-Image-39.jpg" alt="Wedding Image 39" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/wxgr0S4/Wedding-Image-40.jpg" alt="Wedding Image 40" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/qYjdgxVZ/Wedding-Image-41.jpg" alt="Wedding Image 41" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/DhSWVXJ/Wedding-Image-42.jpg" alt="Wedding Image 42" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/Fq7QPVJj/Wedding-Image-43.jpg" alt="Wedding Image 43" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/MkGZZYD9/Wedding-Image-44.jpg" alt="Wedding Image 44" loading="lazy"></div>
+                <div class="gallery-item landscape"><img src="https://i.ibb.co/wFQNZ4MN/Wedding-Image-45.jpg" alt="Wedding Image 45" loading="lazy"></div>
             </div>
         </div>
     </section>
@@ -541,6 +556,14 @@
         sections.forEach(section => observer.observe(section));
         textElements.forEach(element => observer.observe(element));
         transitionLines.forEach(line => observer.observe(line));
+
+        // Sequential Image Loading (Optional, retained for robustness)
+        const images = document.querySelectorAll('.gallery-item img');
+        images.forEach((img, index) => {
+            setTimeout(() => {
+                img.src = img.src; // Trigger lazy loading sequentially
+            }, index * 100); // 100ms delay between each image
+        });
     </script>
 </body>
 </html>
