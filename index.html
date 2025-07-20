@@ -9,33 +9,43 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000; /* Black */
+            background-color: #000000;
             margin: 0;
             overflow-x: hidden;
         }
-        /* Gallery Styles */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 12px;
+        .gallery-container {
+            width: 100%;
+            overflow: hidden; /* Clearfix for floated items */
             padding: 16px;
+            box-sizing: border-box;
+        }
+        .gallery-container::after {
+            content: "";
+            display: table;
+            clear: both; /* Clearfix */
         }
         .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
+            float: left;
+            width: 33.33%; /* 3 images per row on desktop */
+            margin: 8px;
+            overflow: hidden; /* Clip image corners */
+            border-radius: 12px; /* Card-like rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.4s ease, box-shadow 0.4s ease;
+            min-width: 0;
+            box-sizing: border-box;
         }
         .gallery-item img {
             width: 100%;
-            height: 350px;
-            object-fit:cover;
+            height: auto;
+            max-height: 200px; /* Portrait images */
+            object-fit: cover;
             transition: transform 0.4s ease;
             display: block;
+            border-radius: 12px; /* Rounded image corners */
         }
         .gallery-item.landscape img {
-            height: 140px;
+            max-height: 140px; /* Landscape images */
         }
         .gallery-item:hover {
             transform: translateY(-5px) scale(1.05);
@@ -45,7 +55,6 @@
         .gallery-item:hover img {
             transform: scale(1.2);
         }
-        /* Section Transitions */
         section {
             opacity: 0;
             transform: translateZ(-20px);
@@ -55,7 +64,6 @@
             opacity: 1;
             transform: translateZ(0);
         }
-        /* Text Fade-In */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
@@ -65,7 +73,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Hero Banner Effects */
         .hero-banner {
             position: absolute;
             inset: 0;
@@ -106,7 +113,6 @@
             0%, 100% { opacity: 0.7; }
             50% { opacity: 0.5; }
         }
-        /* Fixed Navigation (Desktop) */
         #main-nav {
             position: fixed;
             top: 0;
@@ -133,7 +139,6 @@
         #main-nav .nav-links a {
             margin-left: 1rem;
         }
-        /* Hamburger Menu (Mobile) */
         #hamburger {
             display: none;
             cursor: pointer;
@@ -178,7 +183,6 @@
             font-size: 1.5rem;
             padding: 0.5rem;
         }
-        /* Vertical Transition Line */
         .transition-line {
             position: relative;
             width: 2px;
@@ -190,7 +194,6 @@
         .transition-line.visible {
             height: 80px;
         }
-        /* Section Specific Styles */
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -247,11 +250,10 @@
             height: 1rem;
             margin-right: 0.5rem;
         }
-        /* Responsive YouTube Iframe */
         .youtube-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
         }
         .youtube-iframe {
             position: absolute;
@@ -259,6 +261,22 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+        @media (max-width: 360px) {
+            .gallery-container {
+                padding: 4px;
+            }
+            .gallery-item {
+                width: 100%; /* 1 image per row */
+                margin: 4px 0; /* Vertical spacing only */
+            }
+            .gallery-item img {
+                max-height: 100px; /* Portrait images */
+                border-radius: 12px;
+            }
+            .gallery-item.landscape img {
+                max-height: 70px; /* Landscape images */
+            }
         }
         @media (max-width: 640px) {
             #hamburger {
@@ -270,16 +288,19 @@
             #main-nav {
                 padding: 0.75rem 1.5rem;
             }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 10px;
-                padding: 12px;
+            .gallery-container {
+                padding: 8px;
+            }
+            .gallery-item {
+                width: 100%; /* 1 image per row */
+                margin: 4px 0; /* Vertical spacing only */
             }
             .gallery-item img {
-                height: 140px;
+                max-height: 120px; /* Portrait images */
+                border-radius: 12px;
             }
             .gallery-item.landscape img {
-                height: 200px;
+                max-height: 80px; /* Landscape images */
             }
             .transition-line.visible {
                 height: 50px;
@@ -321,21 +342,25 @@
                 height: 80vh;
             }
             .youtube-container {
-                padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
+                padding-bottom: 56.25%;
             }
             .youtube-iframe {
-                height: 250px; /* Override for mobile */
+                height: 250px;
             }
         }
         @media (min-width: 641px) and (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            .gallery-container {
+                padding: 12px;
+            }
+            .gallery-item {
+                width: 50%; /* 2 images per row */
+                margin: 6px;
             }
             .gallery-item img {
-                height: 160px;
+                max-height: 160px;
             }
             .gallery-item.landscape img {
-                height: 120px;
+                max-height: 120px;
             }
             .section-title {
                 font-size: 2rem;
@@ -344,24 +369,27 @@
                 font-size: 0.95rem;
             }
             .youtube-container {
-                padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
+                padding-bottom: 56.25%;
             }
             .youtube-iframe {
-                height: 350px; /* Tablet size */
+                height: 350px;
             }
         }
         @media (min-width: 769px) {
+            .gallery-item {
+                width: 33.33%; /* 3 images per row */
+                margin: 8px;
+            }
             .youtube-container {
-                padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
+                padding-bottom: 56.25%;
             }
             .youtube-iframe {
-                height: 600px; /* Desktop size */
+                height: 600px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Fixed Navigation (Desktop) and Hamburger (Mobile) -->
     <nav id="main-nav">
         <a href="#" class="logo">Dream Pictures</a>
         <div id="hamburger" class="sm:hidden text-white">
@@ -383,12 +411,7 @@
         <a href="#gallery">Gallery</a>
     </div>
 
-    <!-- Hero Section -->
     <section id="hero" class="relative h-screen flex items-center justify-center text-white hero-section">
-        <!-- 
-            Replace src="banner/wedding_banner.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
-            Upload the hero banner image to Imgur, right-click to copy the direct link, and test in an incognito tab.
-        -->
         <img class="hero-blur" src="https://i.ibb.co/fd7skFmb/Wedding-Image-9.jpg" alt="">
         <img class="hero-banner" src="https://i.ibb.co/fd7skFmb/Wedding-Image-9.jpg" alt="Wedding Banner">
         <div class="hero-overlay"></div>
@@ -398,10 +421,8 @@
         </div>
     </section>
 
-    <!-- Vertical Transition Line -->
     <div class="transition-line"></div>
 
-    <!-- About Us Section -->
     <section id="about" class="py-12 bg-gray-700">
         <div class="container mx-auto px-4 text-center">
             <h2 class="section-title fade-in">About Us</h2>
@@ -420,10 +441,8 @@
         </div>
     </section>
 
-    <!-- Vertical Transition Line -->
     <div class="transition-line"></div>
 
-    <!-- Live Feed Section -->
     <section id="live" class="py-12 bg-1e293b">
         <div class="container mx-auto px-4 text-center">
             <h2 class="section-title fade-in">Live Moments</h2>
@@ -436,23 +455,15 @@
         </div>
     </section>
 
-    <!-- Vertical Transition Line -->
     <div class="transition-line"></div>
 
-    <!-- Gallery Section -->
     <section id="gallery" class="py-12 bg-black">
         <div class="container mx-auto px-4">
             <h2 class="section-title fade-in">Our Wedding Gallery</h2>
             <p class="section-text fade-in">
                 Explore our collection of stunning wedding moments captured with love and precision.
             </p>
-            <div class="gallery-grid">
-                <!-- Portrait Images (38) -->
-                <!-- 
-                    Replace each src="portrait/weddingX.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
-                    Upload each image to Imgur, right-click to copy the direct link, and test in an incognito tab.
-                    Example: <img src="https://i.imgur.com/abc123def.jpg" alt="Wedding Image 1" loading="lazy">
-                -->
+            <div class="gallery-container">
                 <div class="gallery-item"><img src="https://i.ibb.co/TxdW9xJJ/Wedding-Image-1.jpg" alt="Wedding Image 1" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/PGjDKGB4/Wedding-Image-2.jpg" alt="Wedding Image 2" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/nqwDd0Vm/Wedding-Image-3.jpg" alt="Wedding Image 3" loading="lazy"></div>
@@ -491,12 +502,6 @@
                 <div class="gallery-item"><img src="https://i.ibb.co/Kc5pTLkh/Wedding-Image-36.jpg" alt="Wedding Image 36" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/nNMLhMkr/Wedding-Image-37.jpg" alt="Wedding Image 37" loading="lazy"></div>
                 <div class="gallery-item"><img src="https://i.ibb.co/p6nRqMRM/Wedding-Image-38.jpg" alt="Wedding Image 38" loading="lazy"></div>
-                <!-- Landscape Images (7) -->
-                <!-- 
-                    Replace each src="landscape/weddingX.jpg" with an Imgur direct URL (e.g., https://i.imgur.com/XXXXXXXX.jpg).
-                    Upload each image to Imgur, right-click to copy the direct link, and test in an incognito tab.
-                    Example: <img src="https://i.imgur.com/xyz789abc.jpg" alt="Wedding Image 39" loading="lazy">
-                -->
                 <div class="gallery-item landscape"><img src="https://i.ibb.co/Xf554ykv/Wedding-Image-39.jpg" alt="Wedding Image 39" loading="lazy"></div>
                 <div class="gallery-item landscape"><img src="https://i.ibb.co/wxgr0S4/Wedding-Image-40.jpg" alt="Wedding Image 40" loading="lazy"></div>
                 <div class="gallery-item landscape"><img src="https://i.ibb.co/qYjdgxVZ/Wedding-Image-41.jpg" alt="Wedding Image 41" loading="lazy"></div>
@@ -508,9 +513,7 @@
         </div>
     </section>
 
-    <!-- JavaScript for Hamburger Menu, Close Button, Smooth Navigation, and Transitions -->
     <script>
-        // Hamburger Menu and Close Button Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
         const closeMenu = document.getElementById('close-menu');
@@ -523,7 +526,6 @@
             navMenu.classList.add('hidden');
         });
 
-        // Smooth Navigation
         document.querySelectorAll('#main-nav a[href^="#"], #nav-menu a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -539,7 +541,6 @@
             });
         });
 
-        // Intersection Observer for Section, Text, and Line Visibility
         const sections = document.querySelectorAll('section');
         const textElements = document.querySelectorAll('.fade-in');
         const transitionLines = document.querySelectorAll('.transition-line');
@@ -556,14 +557,13 @@
         sections.forEach(section => observer.observe(section));
         textElements.forEach(element => observer.observe(element));
         transitionLines.forEach(line => observer.observe(line));
-
-        // Sequential Image Loading (Optional, retained for robustness)
         const images = document.querySelectorAll('.gallery-item img');
         images.forEach((img, index) => {
             setTimeout(() => {
-                img.src = img.src; // Trigger lazy loading sequentially
-            }, index * 100); // 100ms delay between each image
+                img.src = img.src;
+            }, index * 100);
         });
+       
     </script>
 </body>
 </html>
